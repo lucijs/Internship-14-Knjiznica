@@ -1,0 +1,40 @@
+.input {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background-color: #a3a3c2;
+  color: #131339;
+  border-radius: 10px;
+  padding: 10px;
+  padding: 10px;
+}
+
+.input input,
+select {
+  background-color: inherit;
+  color: inherit;
+  width: 250px;
+}
+
+form {
+  display: flex;
+  flex-direction: row;
+  background-color: #a3a3c2;
+  color: #131339;
+  gap: 10px;
+  border-radius: 10px;
+  width: 400px;
+  margin-left: 5vw;
+}
+
+form button {
+  height: 20px;
+  width: 100px;
+  align-self: flex-end;
+  margin-left: 2px;
+}
+
+select option {
+  background-color: inherit;
+  color: inherit;
+}

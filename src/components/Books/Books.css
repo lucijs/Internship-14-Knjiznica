@@ -60,5 +60,6 @@ h3 {
 h1 {
   font-family: "Fuse V.2 Display";
   color: white;
-  margin-left: 100px;
+  margin-left: 6vw;
+  font-size: 40px;
 }

@@ -1,13 +1,6 @@
 import "./Books.css";
 
 const Books = ({ books, borrowBook, returnBook }) => {
-  const imgStyle = {
-    width: "160px",
-    borderRadius: "9px",
-    marginTop: "5px",
-    marginLeft: "5px",
-  };
-
   const imgAndTextDiv = {
     display: "flex",
     flexDirection: "row",
@@ -19,14 +12,14 @@ const Books = ({ books, borrowBook, returnBook }) => {
   const textDiv = {
     backgroundColor: "inherit",
     borderRadius: "10px",
-    width: "210px",
+    width: "220px",
   };
 
   const conatainer = {
     display: "flex",
     flexDirection: "column",
     gap: "15px",
-    width: "410px",
+    width: "420px",
     backgroundColor: "#a3a3c2",
     color: "#131339",
     borderRadius: "10px",
@@ -37,20 +30,28 @@ const Books = ({ books, borrowBook, returnBook }) => {
     marginLeft: "5vw",
     marginRignt: "5vw",
     display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(400px, 416px))",
+    gridTemplateColumns: "repeat(auto-fit, minmax(400px, 425px))",
     justifyContent: "space-around",
     gap: "35px",
   };
 
   return (
     <>
-      <h1>All Books</h1>
       <div style={allBooks}>
         {books.map((book) => {
           return (
             <div style={conatainer} key={book.id}>
               <div style={imgAndTextDiv}>
-                <img src={book.img} style={imgStyle} />
+                <img
+                  src={book.img}
+                  style={{
+                    width: "160px",
+                    borderRadius: "9px",
+                    marginTop: "5px",
+                    marginLeft: "5px",
+                    opacity: book.copiesAvailable === 0 ? "40%" : "100%",
+                  }}
+                />
                 <div style={textDiv}>
                   <h3 style={textDiv}>{book.title}</h3>
                   <h4 style={textDiv}>Autor: {book.author}</h4>
