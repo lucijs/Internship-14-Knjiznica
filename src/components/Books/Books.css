@@ -46,10 +46,19 @@ button {
   background-color: inherit;
   border-width: 1px;
   color: #131339;
+  width: 200px;
+  margin-left: 100px;
+  margin-bottom: 10px;
 }
 
 h4,
 h3 {
   font-family: "Fuse V.2 Display";
   font-weight: 800;
+}
+
+h1 {
+  font-family: "Fuse V.2 Display";
+  color: white;
+  margin-left: 100px;
 }

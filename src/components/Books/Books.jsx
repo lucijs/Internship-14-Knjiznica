@@ -1,8 +1,18 @@
 import "./Books.css";
 
-const Books = ({ books, borrowBook, returnBook }) => {
+const Books = ({
+  books,
+  borrowBook,
+  returnBook,
+  setBooksData,
+  setNewBook,
+  newBook,
+}) => {
   const imgStyle = {
     width: "160px",
+    borderRadius: "9px",
+    marginTop: "5px",
+    marginLeft: "5px",
   };
 
   const imgAndTextDiv = {
@@ -10,10 +20,13 @@ const Books = ({ books, borrowBook, returnBook }) => {
     flexDirection: "row",
     gap: "30px",
     backgroundColor: "inherit",
+    borderRadius: "10px",
   };
 
   const textDiv = {
     backgroundColor: "inherit",
+    borderRadius: "10px",
+    width: "210px",
   };
 
   const conatainer = {
@@ -23,44 +36,57 @@ const Books = ({ books, borrowBook, returnBook }) => {
     width: "410px",
     backgroundColor: "#a3a3c2",
     color: "#131339",
+    borderRadius: "10px",
   };
 
   const allBooks = {
-    width: "80vw",
-    marginLeft: "10vw",
-    marginRignt: "10vw",
+    width: "90vw",
+    marginLeft: "5vw",
+    marginRignt: "5vw",
     display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(100px, 216px))",
+    gridTemplateColumns: "repeat(auto-fit, minmax(400px, 416px))",
     justifyContent: "space-around",
-    gap: "24px",
+    gap: "35px",
   };
 
   return (
-    <div style={allBooks}>
-      {books.map((book) => {
-        return (
-          <div style={conatainer}>
-            <div style={imgAndTextDiv}>
-              <img src={book.img} style={imgStyle} />
-              <div style={textDiv}>
-                <h3 style={textDiv}>{book.title}</h3>
-                <h4 style={textDiv}>Autor: {book.author}</h4>
-                <p style={textDiv}>Izdavačka kuća: {book.publisher}</p>
-                <p style={textDiv}>Godina izdavanja: {book.year}</p>
-                <p style={textDiv}>Žanr: {book.genre}</p>
-                <p style={textDiv}>
-                  Broj dostupnih primjeraka: {book.copiesAvailable}
-                </p>
+    <>
+      <h1>All Books</h1>
+      <div style={allBooks}>
+        {books.map((book) => {
+          return (
+            <div style={conatainer} key={book.id}>
+              <div style={imgAndTextDiv}>
+                <img src={book.img} style={imgStyle} />
+                <div style={textDiv}>
+                  <h3 style={textDiv}>{book.title}</h3>
+                  <h4 style={textDiv}>Autor: {book.author}</h4>
+                  <p style={textDiv}>Izdavačka kuća: {book.publisher}</p>
+                  <p style={textDiv}>Godina izdavanja: {book.year}</p>
+                  <p style={textDiv}>Žanr: {book.genre}</p>
+                  <p style={textDiv}>
+                    Broj dostupnih primjeraka: {book.copiesAvailable}
+                  </p>
+                </div>
               </div>
+
+              <button
+                onClick={() => borrowBook(book.id, setBooksData, books)}
+                disabled={book.copiesAvailable === 0}>
+                Posudi knjigu
+              </button>
+
+              <button
+                onClick={() =>
+                  returnBook(book.id, setBooksData, books, setNewBook, newBook)
+                }>
+                Vrati knjigu
+              </button>
             </div>
-
-            <button onClick={borrowBook}> Posudi knjigu </button>
-
-            <button onClick={returnBook}> Vrati knjigu </button>
-          </div>
-        );
-      })}
-    </div>
+          );
+        })}
+      </div>
+    </>
   );
 };
 
