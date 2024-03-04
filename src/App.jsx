@@ -4,9 +4,12 @@ import { books } from "./assets/data.js";
 import Books from "./components/Books/Books.jsx";
 import "./App.css";
 import Form from "./components/Form/Form.jsx";
+import Filter from "./components/Filter/Filter.jsx";
 
 function App() {
   const [booksData, setBooksData] = useState(books);
+  const [search, setSearch] = useState("");
+  const [genreFilter, setGenreFilter] = useState("");
   const [newBook, setNewBook] = useState({
     id: "",
     title: "",
@@ -17,7 +20,6 @@ function App() {
     genre: "",
     copiesAvailable: 0,
   });
-
   const [initialized, setInitialized] = useState(false);
 
   useEffect(() => {
@@ -75,7 +77,6 @@ function App() {
       !newBook.genre ||
       newBook.copiesAvailable < 0
     ) {
-      alert("Molimo popunite sva obavezna polja.");
       return;
     }
     if (newBook.img === undefined)
@@ -95,16 +96,35 @@ function App() {
 
   return (
     <>
-      <h1>Unsei novu knjigu</h1>
+      <h1>Unesi novu knjigu</h1>
       <Form addBook={addBook} newBook={newBook} setNewBook={setNewBook} />
       <h1>Sve knjige</h1>
+      <Filter
+        setSearch={setSearch}
+        setGenreFilter={setGenreFilter}
+        genreFilter={genreFilter}
+        search={search}
+      />
       <Books
-        books={booksData.sort(
-          (book1, book2) =>
-            book1.author.localeCompare(book2.author) ||
-            book1.title.localeCompare(book2.title) ||
-            book1.year - book2.year
-        )}
+        books={booksData
+          .sort(
+            (book1, book2) =>
+              book1.author.localeCompare(book2.author) ||
+              book1.title.localeCompare(book2.title) ||
+              book1.year - book2.year
+          )
+          .filter((book) => {
+            const titleMatches = book.title
+              .toLowerCase()
+              .includes(search.toLowerCase());
+            const authorMatches = book.author
+              .toLowerCase()
+              .includes(search.toLowerCase());
+            const genreMatches = genreFilter
+              ? book.genre === genreFilter
+              : true;
+            return (titleMatches || authorMatches) && genreMatches;
+          })}
         borrowBook={borrowBook}
         returnBook={returnBook}
       />

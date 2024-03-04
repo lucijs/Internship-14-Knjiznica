@@ -15,6 +15,7 @@ const Form = ({ addBook, newBook, setNewBook }) => {
           placeholder="Naslov"
           onChange={handleChange}
           value={newBook.title}
+          required
         />
         <input
           type="text"
@@ -22,6 +23,7 @@ const Form = ({ addBook, newBook, setNewBook }) => {
           placeholder="Autor/ica"
           onChange={handleChange}
           value={newBook.author}
+          required
         />
         <input
           type="text"
@@ -36,6 +38,7 @@ const Form = ({ addBook, newBook, setNewBook }) => {
           placeholder="Izdavačka kuća"
           onChange={handleChange}
           value={newBook.publisher}
+          required
         />
         <select
           name="genre"

@@ -1,0 +1,21 @@
+.search {
+  display: flex;
+  flex-direction: row;
+  background-color: #a3a3c2;
+  color: #131339;
+  gap: 10px;
+  border-radius: 10px;
+  width: 420px;
+  margin-left: 5vw;
+  margin-bottom: 30px;
+  height: 50px;
+  align-items: center;
+  justify-content: space-around;
+}
+.search input,
+select {
+  background-color: inherit;
+  color: inherit;
+  width: 180px;
+  height: fit-content;
+}
