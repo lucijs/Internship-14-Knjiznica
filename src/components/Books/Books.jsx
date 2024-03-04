@@ -1,13 +1,6 @@
 import "./Books.css";
 
-const Books = ({
-  books,
-  borrowBook,
-  returnBook,
-  setBooksData,
-  setNewBook,
-  newBook,
-}) => {
+const Books = ({ books, borrowBook, returnBook }) => {
   const imgStyle = {
     width: "160px",
     borderRadius: "9px",
@@ -71,17 +64,12 @@ const Books = ({
               </div>
 
               <button
-                onClick={() => borrowBook(book.id, setBooksData, books)}
+                onClick={() => borrowBook(book.id)}
                 disabled={book.copiesAvailable === 0}>
                 Posudi knjigu
               </button>
 
-              <button
-                onClick={() =>
-                  returnBook(book.id, setBooksData, books, setNewBook, newBook)
-                }>
-                Vrati knjigu
-              </button>
+              <button onClick={() => returnBook(book.id)}>Vrati knjigu</button>
             </div>
           );
         })}

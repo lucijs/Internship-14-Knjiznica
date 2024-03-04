@@ -3,7 +3,6 @@ import { v4 as uuidv4 } from "uuid";
 import { books } from "./assets/data.js";
 import Books from "./components/Books/Books.jsx";
 import "./App.css";
-import BorrowBooks from "./components/BorrowBooks/BorrowBooks.jsx";
 
 function App() {
   const [booksData, setBooksData] = useState(books);
@@ -43,7 +42,29 @@ function App() {
     }
   }, [books, initialized]);
 
-  function returnBook() {}
+  const borrowBook = (id) => {
+    const newBooksData = booksData.map((book) => {
+      if (book.id === id) {
+        return { ...book, copiesAvailable: book.copiesAvailable - 1 };
+      } else {
+        return book;
+      }
+    });
+    setBooksData(newBooksData);
+    localStorage.setItem("books", JSON.stringify(newBooksData));
+  };
+
+  const returnBook = (id) => {
+    const newBooksData = booksData.map((book) => {
+      if (book.id === id) {
+        return { ...book, copiesAvailable: book.copiesAvailable + 1 };
+      } else {
+        return book;
+      }
+    });
+    setBooksData(newBooksData);
+    localStorage.setItem("books", JSON.stringify(newBooksData));
+  };
 
   return (
     <>
@@ -54,11 +75,8 @@ function App() {
             book1.title.localeCompare(book2.title) ||
             book1.year - book2.year
         )}
-        borrowBook={BorrowBooks}
-        setBooksData={setBooksData}
-        setNewBook={setNewBook}
+        borrowBook={borrowBook}
         returnBook={returnBook}
-        newBook={newBook}
       />
     </>
   );
